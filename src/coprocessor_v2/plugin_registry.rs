@@ -350,6 +350,10 @@ pub struct LoadedPlugin {
     version: Version,
     /// Pointer to a [`CoprocessorPlugin`] in the loaded `lib`.
     plugin: Box<dyn CoprocessorPlugin>,
+    /// The loaded dynamic library. Will be dropped when unloading the plugin in order
+    /// to enable hot-reloading of the library.
+    #[allow(dead_code)]
+    lib: Library,
 }
 
 impl LoadedPlugin {
@@ -398,13 +402,11 @@ impl LoadedPlugin {
         let boxed_raw_plugin = plugin_constructor(host_allocator);
         let plugin = Box::from_raw(boxed_raw_plugin);
 
-        // Leak library so that we will never drop it
-        std::mem::forget(lib);
-
         Ok(LoadedPlugin {
             name,
             version,
             plugin,
+            lib,
         })
     }
 
