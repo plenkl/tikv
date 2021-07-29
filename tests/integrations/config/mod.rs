@@ -214,6 +214,9 @@ fn test_serde_custom_tikv_config() {
     let titan_cf_config = TitanCfConfig {
         min_blob_size: ReadableSize(2018),
         blob_file_compression: CompressionType::Zstd,
+        blob_file_compression_level: 32767,
+        blob_file_zstd_compression_dict_size: 0,
+        blob_file_zstd_compression_sample_size: 0,
         blob_cache_size: ReadableSize::gb(12),
         min_gc_batch_size: ReadableSize::kb(12),
         max_gc_batch_size: ReadableSize::mb(12),
@@ -312,6 +315,7 @@ fn test_serde_custom_tikv_config() {
             compaction_guard_min_output_file_size: ReadableSize::mb(12),
             compaction_guard_max_output_file_size: ReadableSize::mb(34),
             bottommost_level_compression: DBCompressionType::Disable,
+            bottommost_level_compression_level: 32767,
             bottommost_zstd_compression_dict_size: 1024,
             bottommost_zstd_compression_sample_size: 1024,
         },
@@ -357,6 +361,9 @@ fn test_serde_custom_tikv_config() {
             titan: TitanCfConfig {
                 min_blob_size: ReadableSize(1024), // default value
                 blob_file_compression: CompressionType::Lz4,
+                blob_file_compression_level: 32767,
+                blob_file_zstd_compression_dict_size: 0,
+                blob_file_zstd_compression_sample_size: 0,
                 blob_cache_size: ReadableSize::mb(0),
                 min_gc_batch_size: ReadableSize::mb(16),
                 max_gc_batch_size: ReadableSize::mb(64),
@@ -376,6 +383,7 @@ fn test_serde_custom_tikv_config() {
             compaction_guard_min_output_file_size: ReadableSize::mb(12),
             compaction_guard_max_output_file_size: ReadableSize::mb(34),
             bottommost_level_compression: DBCompressionType::Zstd,
+            bottommost_level_compression_level: 32767,
             bottommost_zstd_compression_dict_size: 0,
             bottommost_zstd_compression_sample_size: 0,
         },
@@ -421,6 +429,9 @@ fn test_serde_custom_tikv_config() {
             titan: TitanCfConfig {
                 min_blob_size: ReadableSize(1024), // default value
                 blob_file_compression: CompressionType::Lz4,
+                blob_file_compression_level: 32767,
+                blob_file_zstd_compression_dict_size: 0,
+                blob_file_zstd_compression_sample_size: 0,
                 blob_cache_size: ReadableSize::mb(0),
                 min_gc_batch_size: ReadableSize::mb(16),
                 max_gc_batch_size: ReadableSize::mb(64),
@@ -440,6 +451,7 @@ fn test_serde_custom_tikv_config() {
             compaction_guard_min_output_file_size: ReadableSize::mb(12),
             compaction_guard_max_output_file_size: ReadableSize::mb(34),
             bottommost_level_compression: DBCompressionType::Disable,
+            bottommost_level_compression_level: 32767,
             bottommost_zstd_compression_dict_size: 0,
             bottommost_zstd_compression_sample_size: 0,
         },
@@ -485,6 +497,9 @@ fn test_serde_custom_tikv_config() {
             titan: TitanCfConfig {
                 min_blob_size: ReadableSize(1024), // default value
                 blob_file_compression: CompressionType::Lz4,
+                blob_file_compression_level: 32767,
+                blob_file_zstd_compression_dict_size: 0,
+                blob_file_zstd_compression_sample_size: 0,
                 blob_cache_size: ReadableSize::mb(0),
                 min_gc_batch_size: ReadableSize::mb(16),
                 max_gc_batch_size: ReadableSize::mb(64),
@@ -504,6 +519,7 @@ fn test_serde_custom_tikv_config() {
             compaction_guard_min_output_file_size: ReadableSize::mb(12),
             compaction_guard_max_output_file_size: ReadableSize::mb(34),
             bottommost_level_compression: DBCompressionType::Disable,
+            bottommost_level_compression_level: 32767,
             bottommost_zstd_compression_dict_size: 0,
             bottommost_zstd_compression_sample_size: 0,
         },
@@ -583,6 +599,7 @@ fn test_serde_custom_tikv_config() {
             compaction_guard_min_output_file_size: ReadableSize::mb(12),
             compaction_guard_max_output_file_size: ReadableSize::mb(34),
             bottommost_level_compression: DBCompressionType::Disable,
+            bottommost_level_compression_level: 32767,
             bottommost_zstd_compression_dict_size: 0,
             bottommost_zstd_compression_sample_size: 0,
         },
