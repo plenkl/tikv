@@ -103,6 +103,10 @@ pub struct TitanCfConfig {
     #[online_config(skip)]
     pub blob_file_compression: CompressionType,
     #[online_config(skip)]
+    pub blob_file_zstd_compression_dict_size: i32,
+    #[online_config(skip)]
+    pub blob_file_zstd_compression_sample_size: i32,
+    #[online_config(skip)]
     pub blob_cache_size: ReadableSize,
     #[online_config(skip)]
     pub min_gc_batch_size: ReadableSize,
@@ -130,6 +134,8 @@ impl Default for TitanCfConfig {
         Self {
             min_blob_size: ReadableSize::kb(1), // disable titan default
             blob_file_compression: CompressionType::Lz4,
+            blob_file_zstd_compression_dict_size: 0,
+            blob_file_zstd_compression_sample_size: 0,
             blob_cache_size: ReadableSize::mb(0),
             min_gc_batch_size: ReadableSize::mb(16),
             max_gc_batch_size: ReadableSize::mb(64),
@@ -150,6 +156,13 @@ impl TitanCfConfig {
         let mut opts = TitanDBOptions::new();
         opts.set_min_blob_size(self.min_blob_size.0 as u64);
         opts.set_blob_file_compression(self.blob_file_compression.into());
+        opts.set_compression_options(
+            -14,   /* window bits */
+            32767, /* level */
+            0,     /* strategy */
+            self.blob_file_zstd_compression_dict_size,
+            self.blob_file_zstd_compression_sample_size,
+        }
         opts.set_blob_cache(self.blob_cache_size.0 as usize, -1, false, 0.0);
         opts.set_min_gc_batch_size(self.min_gc_batch_size.0 as u64);
         opts.set_max_gc_batch_size(self.max_gc_batch_size.0 as u64);
